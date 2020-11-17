@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Book} from '../shared/book';
 
 @Component({
@@ -10,6 +10,7 @@ export class BookListComponent implements OnInit {
 
   //https://stackoverflow.com/questions/49699067/property-has-no-initializer-and-is-not-definitely-assigned-in-the-construc
   books: Book[];
+  @Output() showDetailsEvent = new EventEmitter<Book>();
 
   ngOnInit(): void {
     this.books =[
@@ -34,7 +35,12 @@ export class BookListComponent implements OnInit {
           url: 'https://ng-buch.de/angular-cover.jpg',
           title: 'Buchcover'
         }],
+        description: 'Book about Angular'
       }
     ];
+  }
+
+  showDetails(book: Book){
+    this.showDetailsEvent.emit(book);
   }
 }

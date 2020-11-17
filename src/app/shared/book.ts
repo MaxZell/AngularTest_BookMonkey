@@ -6,7 +6,7 @@ export interface Book {
     subtitle?: string;
     rating?: number;
     thumbnails?: Thumbnail[];
-    describtion?: string;
+    description?: string;
 }
 
 export interface Thumbnail{
