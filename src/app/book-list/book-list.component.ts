@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Book} from '../shared/book';
+import {BookStoreService} from '../shared/book-store.service';
 
 @Component({
   selector: 'bm-book-list',
@@ -12,32 +13,10 @@ export class BookListComponent implements OnInit {
   books: Book[];
   @Output() showDetailsEvent = new EventEmitter<Book>();
 
+  constructor(private bs: BookStoreService){}
+
   ngOnInit(): void {
-    this.books =[
-      {
-        isbn: '0001',
-        title: 'Die Abenteuer des Tom Sawyer',
-        authors: ['Mark Twain'],
-        published: new Date(1876, 1, 1),
-        thumbnails:[{
-          url: 'https://media.giphy.com/media/MKZxRoSup632N5HCHa/giphy.gif',
-          title: 'Buchcover'
-        }],
-      },
-      {
-        isbn: '0002',
-        title: 'Angular',
-        authors: ['Ferdinant Malcher', 'Johannes Hoppe','Danny Koppenhagen'],
-        published: new Date(2020, 8, 1),
-        subtitle: 'Grundlagen...',
-        rating: 5,
-        thumbnails:[{
-          url: 'https://ng-buch.de/angular-cover.jpg',
-          title: 'Buchcover'
-        }],
-        description: 'Book about Angular'
-      }
-    ];
+    this.books = this.bs.getAll();
   }
 
   showDetails(book: Book){

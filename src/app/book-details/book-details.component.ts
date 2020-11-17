@@ -13,7 +13,7 @@ export class BookDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getRating(num: any){//should be number
+  getRating(num: unknown){//should be a number
     return new Array(num);
   }
 
