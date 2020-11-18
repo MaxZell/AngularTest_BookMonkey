@@ -23,5 +23,5 @@
     <h4>Beschreibung</h4>
     <p>{{book.description}}</p>
     <div class="ui small images"><img *ngFor="let thumbnail of book.thumbnails" [src]='thumbnail.url'></div>
-    <!-- <button class="ui red button" (click)='showBookList()'>Zurück</button> -->
+    <a routerLink="./.." class="ui red button">Zurück</a>
 </div>

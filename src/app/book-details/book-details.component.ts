@@ -20,7 +20,7 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const params = this.route.snapshot.paramMap;
-    this.book = this.bs.getSingle(params.get('isbn'));//vc show an error but it compiles
+    this.book = this.bs.getSingle(params.get('isbn'));//vc show an error but it compiles  
   }
 
   getRating(num?: number){
