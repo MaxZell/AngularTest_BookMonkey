@@ -1,45 +1,26 @@
 import { Injectable } from '@angular/core';
-import {Book} from './book';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Book } from './book';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookStoreService {
+  
+  private api = 'https://api4.angular-buch.com';
 
-  books: Book[];
-  constructor() {
-    this.books =[
-      {
-        isbn: '0001',
-        title: 'Die Abenteuer des Tom Sawyer',
-        authors: ['Mark Twain'],
-        published: new Date(1876, 1, 1),
-        thumbnails:[{
-          url: 'https://media.giphy.com/media/MKZxRoSup632N5HCHa/giphy.gif',
-          title: 'Buchcover'
-        }],
-      },
-      {
-        isbn: '0002',
-        title: 'Angular',
-        authors: ['Ferdinant Malcher', 'Johannes Hoppe','Danny Koppenhagen'],
-        published: new Date(2020, 8, 1),
-        subtitle: 'Grundlagen...',
-        rating: 5,
-        thumbnails:[{
-          url: 'https://ng-buch.de/angular-cover.jpg',
-          title: 'Buchcover'
-        }],
-        description: 'Book about Angular'
-      }
-    ];
+  constructor(private http: HttpClient) {}
+
+  getAll(): Observable<Book[]>{
+    return this.http.get<any>(`${this.api}/books`);
   }
 
-  getAll(): Book[]{
-    return this.books;
+  getSingle(isbn?: string): Observable<Book>{
+    return this.http.get<any>(`${this.api}/book/${isbn}`);
   }
 
-  getSingle(isbn: string){//should be ": Book" (=> book-details.component.ts)
-    return this.books.find(book => book.isbn === isbn);
+  remove(isbn: string): Observable<any>{
+    return this.http.delete(`${this.api}/book/${isbn}`, {responseType: 'text'});
   }
 }

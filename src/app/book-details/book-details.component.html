@@ -1,4 +1,4 @@
-<div *ngIf="book">
+<div *ngIf="book; else loading">
     <h1>{{book.title}}</h1>
     <h3 *ngIf="book.subtitle">{{book.subtitle}}</h3>
     <div class="ui divider"></div>
@@ -23,5 +23,9 @@
     <h4>Beschreibung</h4>
     <p>{{book.description}}</p>
     <div class="ui small images"><img *ngFor="let thumbnail of book.thumbnails" [src]='thumbnail.url'></div>
+    <button class="ui tiny red labeled icon button" (click)="removeBook()"><i class="remove icon"></i>Buch löschen</button>
     <a routerLink="./.." class="ui red button">Zurück</a>
 </div>
+<ng-template #loading>
+    <div class="ui active centred inline loader"></div>
+</ng-template>

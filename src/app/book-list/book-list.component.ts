@@ -11,15 +11,10 @@ export class BookListComponent implements OnInit {
 
   //https://stackoverflow.com/questions/49699067/property-has-no-initializer-and-is-not-definitely-assigned-in-the-construc
   books: Book[];
-  @Output() showDetailsEvent = new EventEmitter<Book>();
 
   constructor(private bs: BookStoreService){}
 
   ngOnInit(): void {
-    this.books = this.bs.getAll();
-  }
-
-  showDetails(book: Book){
-    this.showDetailsEvent.emit(book);
+    this.bs.getAll().subscribe(res => this.books = res);
   }
 }
