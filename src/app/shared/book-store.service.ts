@@ -16,7 +16,7 @@ export class BookStoreService {
     return this.http.get<any>(`${this.api}/books`);
   }
 
-  getSingle(isbn?: string): Observable<Book>{
+  getSingle(isbn?: string | null): Observable<Book>{
     return this.http.get<any>(`${this.api}/book/${isbn}`);
   }
 
